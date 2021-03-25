@@ -94,6 +94,36 @@ public class ListaOrdinal {
         return this.posicion(dato) >= 0;
     }
 
+    public boolean contieneEjercicio9(int dato) {
+        if(!vacia()){
+            boolean retorno = contieneEjercicio9Rec(dato);
+            if(retorno) {
+                Nodo nuevo = new Nodo(dato, inicio);
+                inicio = nuevo;
+            }
+            return retorno;
+        }else{
+            return false;
+        }
+    }
+    // true o false y además quitae el elemento de la lista
+    public boolean contieneEjercicio9Rec(int dato) {
+        if(vacia()){
+            return false;
+        }else{
+            if(inicio.getDato()==dato){
+                inicio = inicio.getSiguiente();
+                return true;
+            }else{
+                int e = inicio.getDato();
+                inicio = inicio.getSiguiente();
+                boolean retorno = contieneEjercicio9Rec(dato);
+                Nodo nuevo = new Nodo(e, inicio);
+                inicio = nuevo;
+                return retorno;
+            }
+        }
+    }
     public int getNumElementos() {
         return numElementos;
     }
